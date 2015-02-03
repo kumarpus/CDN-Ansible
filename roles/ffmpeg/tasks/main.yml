@@ -77,16 +77,15 @@
       version: "{{ ffmpeg_version }}"
     register: ffmpeg_source
 
-  - name: Configuring ffmpeg
-    command: "./configure {{ ffmpeg_custom_module }}"
-    args:
-      chdir: "{{ ffmpeg_install_dir }}"
-    register: ffmpeg_configure
-
-  - name: Installing ffmpeg
+  - name: Compiling and Installing the ffmpeg
     become: yes
-    shell: make -j4 && make -j4 install
+    shell: "{{ item }}"
     args:
-      chdir: "{{ ffmpeg_install_dir }}"
+       chdir: "{{ ffmpeg_install_dir }}"
+    with_items:
+      - ./configure {{ ffmpeg_custom_module }}
+      - make -j$(nproc)
+      - make -j$(nproc) install
+  
 
 
