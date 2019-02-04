@@ -7,7 +7,7 @@
   to upcoming launch of Intel Select Solution for CDN on Cascade Lake platform.
 
 
-  > Require Ansible 2.4 or newer 
+  > Require Ansible 2.4 or newer \
   > Expects NFVi-BKC (Ubuntu-16.04) Debian hosts
 
 
@@ -19,10 +19,10 @@
 
     Please set following environment variables-
     ```
-     $ export CDN_DIR="Enter the path of CDN directory"\
-     $ export http_proxy="Enter the http_proxy"\
-     $ export https_proxy="Enter the https_proxy"\
-     $ export hostname="Enter the hostname or IP of server"\
+     $ export CDN_DIR="Enter the path of CDN directory"
+     $ export http_proxy="Enter the http_proxy"
+     $ export https_proxy="Enter the https_proxy"
+     $ export hostname="Enter the hostname or IP of server"
 
      $ printf "proxy_env\n http_proxy=\"$http_proxy\"\n https_proxy=\"$https_proxy\"\n\nhostname=\"$hostname\"\n" | sudo tee $CDN_PATH/group_vars/all
     ```     
@@ -32,14 +32,14 @@
 
  4. Ansible has host key checking enabled by default. If a host is reinstalled and has a different 
     key in `known_hosts`, this will result in an error message until corrected. You can disable 
-    this behavior, you can do so by editing /etc/ansible/ansible.cfg
+    this behavior, you can do so by editing `/etc/ansible/ansible.cfg`
 
   ```
     [defaults]
     host_key_checking = False
   ```
 
-    Alternatively this can be set by the ANSIBLE_HOST_KEY_CHECKING environment variable:
+  Alternatively this can be set by the ANSIBLE_HOST_KEY_CHECKING environment variable:
 
    ```
     $ export ANSIBLE_HOST_KEY_CHECKING=False
@@ -52,21 +52,20 @@
     $ ssh-keygen -t rsa -b 4096 -C "username@ip_add_of_ansible_machine"
    ```
   
-    Now copy the ssh key generated to the remote hosts (Before copying the ssh key make sure that 
-    you are able to ssh the remote host where you want to copy the key):
+  Now copy the ssh key generated to the remote hosts (Before copying the ssh key make sure that 
+  you are able to ssh the remote host where you want to copy the key):
    
    ```
     $ ssh-copy-id remote_user@remote_ip
    ```
     
-   To set up SSH agent to avoid retyping passwords, you can do:   
+  To set up SSH agent to avoid retyping passwords, you can do:   
    
    ```
     $ ssh-agent bash
     $ ssh-add ~/.ssh/id_rsa
    ```
- 
-    For more detail about ansible setup refer link [Getting Started Ansible](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html).
+  For more detail about ansible setup refer link [Getting Started Ansible](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html).
   
  6. Now as we have setup our `inventory` file and other configurations are done, lets try pinging 
     all the servers listed in the `inventory` file.
@@ -75,22 +74,21 @@
     $ ansible -i inventory all -m ping
    ```
 
-    If pinging get successfull, then we are good and can go further :) 
+  If pinging get successfull, then we are good and can go further :) 
 
  7. For running the playbook go inside CDN directory where you have `CDN.yml`, `inventory` etc., should 
     be present. The ansible playbook command is given below:
  
-  ```
+   ```
     $ ansible-playbook -i inventory CDN.yml --become -K
-  ```
+   ```
 
-    here -K, ask for privilege escalation password
+  here -K, ask for privilege escalation password
  
-    When the playbook run complete, the CDN components will be installed successfully on the target 
-    machines. 
+  When the playbook run complete, the CDN components will be installed successfully on the target machines. 
 
 
- ##ansible_install.sh
+ ## ansible_install.sh
  
   The `ansible_install.sh` script provided will install the ansible and configure the target machines.
   First make the script executable and then run in same directory like:
@@ -111,10 +109,10 @@
 
 
 
- #ROLES: CDN Components
+ # ROLES: CDN Components
 
 
-  ##Apache traffic Server (ATS)
+  ## Apache traffic Server (ATS)
 
   Apache Traffic Server is a high-performance web proxy cache that improves network efficiency and 
   performance by caching frequently-accessed information at the edge of the network. This role install 
@@ -126,24 +124,24 @@
   This Playbook will copy the optimal config files to target machines, if you want to edit any of config file 
   you can do in target machine at `/opt/ats/etc/trafficserver/*`
  
-```
-  $ ansible-playbook -i inventory start_ats.yml --become -K 
-```
+ ```
+   $ ansible-playbook -i inventory start_ats.yml --become -K 
+ ```
 
-  If you have made any changes in config files and want to restart the trafficserver then run the 
-  `stop_ats.yml`, like:
+ If you have made any changes in config files and want to restart the trafficserver then run the 
+ `stop_ats.yml`, like:
 
-```
-  ansible-playbook -i inventory stop_ats.yml --become -K 
-```
-  Then start the trafficserver using `start_ats.yml` 
+  ```
+   ansible-playbook -i inventory stop_ats.yml --become -K 
+  ```
+ Then start the trafficserver using `start_ats.yml` 
 
   vars directory contains the variable that are used in `tasks/main.yml`
   handlers directory contains the handlers that are triggers by notify in `tasks/main.yml`
   template directory contains the config files that will be copied to target machines
 
 
-  ##NGINX
+  ## NGINX
 
   NGINX is server for web serving, media streaming. In addition to its HTTP and HTTPS server capabilities. 
   **nginx+rtmp-module** Media streaming, http and https. This role install and configure the nginx+rtmp-module 
@@ -155,15 +153,15 @@
 
   After CDN.yml run completes, you can start the nginx using `start_nginx.yml` inside nginx role, like:
   
-```
-  $ ansible-playbook -i inventory start_nginx.yml --become -K 
-```
+  ```
+    $ ansible-playbook -i inventory start_nginx.yml --become -K 
+  ```
 
   If you made any changes in conf files and want to restart the nginx then run the `stop_nginx.yml`, like:
  
-```
-  $ ansible-playbook -i inventory stop_nginx.yml --become -K 
-```
+  ```
+    $ ansible-playbook -i inventory stop_nginx.yml --become -K 
+  ```
   
   Then start the nginx using `start_ats.yml` like above. 
 
@@ -172,7 +170,7 @@
   template directory contains the conf file that will be copied to target machines
 
 
-  ##FFMPeg
+  ## FFMPeg
 
   FFmpeg is a command line tool for video and audio transcoding for both live and static content.
   This role install and configure the ffmpeg from source.
@@ -182,28 +180,28 @@
   
   This playbook will configure following codecs:
 
-  - H.264 (libx264) video encoder\
-  - H.265 (libx265) video encoder\
-  - AV1 (libaom) video encoder/decoder\
-  - VP8/VP9 (libvpx) video encoder/decoder\
-  - AAC (libfdk-aac) audio encoder\
+  - H.264 (libx264) video encoder
+  - H.265 (libx265) video encoder
+  - AV1 (libaom) video encoder/decoder
+  - VP8/VP9 (libvpx) video encoder/decoder
+  - AAC (libfdk-aac) audio encoder
   - MP3 (libmp3lame) audio encoder
   - Opus (libopus) audio decoder and encoder
     
   For running the ffmpeg, go to localtion where input files are stored and run the ffmpeg command
   with or without codec:
 
-```
-  $ ffmpeg -i InputVideo.mpg ...[video options] [audio options] [output]
-```
+  ```
+    $ ffmpeg -i InputVideo.mpg ...[video options] [audio options] [output]
+  ```
 
-  For more detail, please refer manual page of ffmpeg:\
+  For more detail, please refer manual page of ffmpeg:
 
-```
-  $ man ffmpeg 
-```
+  ```
+    $ man ffmpeg 
+  ```
 
-  ##Scalabale Video Transcode(SVT)
+  ## Scalabale Video Transcode(SVT)
 
   The Scalable Video Technology for HEVC Encoder (SVT-HEVC Encoder) is an HEVC-compliant encoder library core 
   that achieves excellent density-quality tradeoffs, and is highly optimized for Intel Xeon  Scalable 
@@ -214,9 +212,9 @@
      to any location of your choice.
   2. Change the permissions on the sample application `HevcEncoderApp` executable by running the command: 
     
-    ```
+  ```
      $ chmod +x HevcEncoderApp
-    ```
+  ```
 
   3. cd into your chosen location
   4. Run the sample application to encode.
@@ -227,7 +225,7 @@
        ./HevcEncoderApp -i stdin -n [number_of_frames_to_encode] -w [width] -h [height]
   ```
 
-  ##ADDITIONAL INFO:
+  ## ADDITIONAL INFO:
   For any query and suggestion please drop mail at
-  > Amruta Misra (amruta.misra@intel.com)
+  > Amruta Misra (amruta.misra@intel.com) \
   > Pushpendra Kumar (pushpendra.kumar@intel.com)
