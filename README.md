@@ -1,16 +1,29 @@
 
- NFV Usecase: Content Delivery Network (CDN):
- ============================================
+ Content Delivery Network (CDN):
+ ==============================
+  Content Delivery Network are growing in importance are being viewed as new class of CPSs. 
+  The objective of this project is to share an optimize recipe and a CDN reference solution 
+  based on open source frameworks. This is based on SKL-Purley platform and is a pre cursor 
+  to upcoming launch of Intel Select Solution for CDN on Cascade Lake platform.
 
-   Require Ansible 2.4 or newer 
-   Expects NFVi-BKC (Ubuntu-16.04) Debian hosts
+
+  [+] Require Ansible 2.4 or newer 
+  [+] Expects NFVi-BKC (Ubuntu-16.04) Debian hosts
 
 
  1. These playbooks deploy a implementation of various components of CDN such as ATS (version 7.1.5),
     ffmpeg (n4.0.3), nginx (version 1.14.0)+ rtmp-module and SVT (v1.2.0). 
 
  2. To use CDN components, first edit group_vars/all (hostname of nginx node for creating ssl 
-    certificate and proxy environment).
+    certificate and proxy environment). This can be done by:
+
+    Please set following environment variables-
+     $ export CDN_DIR="Enter the path of CDN directory"
+     $ export http_proxy="Enter the http_proxy"
+     $ export https_proxy="Enter the https_proxy"
+     $ export hostname="Enter the hostname or IP of server"
+
+     $ printf "proxy_env\n http_proxy=\"$http_proxy\"\n https_proxy=\"$https_proxy\"\n\nhostname=\"$hostname\"\n" | sudo tee $CDN_PATH/group_vars/all
 
  3. Also edit the "inventory" file that contains the hostnames/IPs and login credential of 
     the machines on which you want these components to install.
@@ -87,8 +100,8 @@
  ROLES: CDN Components
  =====================
 
-  ats 
-  ================
+  Apache traffic Server (ATS)
+  ===========================
   Apache Traffic Server is a high-performance web proxy cache that improves network efficiency and 
   performance by caching frequently-accessed information at the edge of the network. This role install 
   and configure the apache traffic server from source. After CDN.yml run completes, you can start the 
@@ -113,7 +126,7 @@
   template directory contains the config files that will be copied to target machines
 
 
-  nginx
+  NGINX
   =================
   NGINX is server for web serving, media streaming. In addition to its HTTP and HTTPS server capabilities. 
   nginx+rtmp-module => Media streaming, http and https. This role install and configure the nginx+rtmp-module 
@@ -138,7 +151,7 @@
   template directory contains the conf file that will be copied to target machines
 
 
-  ffmpeg
+  FFMPeg
   ================
   FFmpeg is a command line tool for video and audio transcoding for both live and static content.
   This role install and configure the ffmpeg from source.
@@ -165,8 +178,8 @@
   $ man ffmpeg 
 
 
-  svt
-  =================
+  Scalabale Video Transcode(SVT)
+  ==============================
   The Scalable Video Technology for HEVC Encoder (SVT-HEVC Encoder) is an HEVC-compliant encoder library core 
   that achieves excellent density-quality tradeoffs, and is highly optimized for Intel Xeon  Scalable 
   Processor and on D processors.
@@ -187,9 +200,7 @@
 
 
 
-
   ADDITIONAL INFO:
-
-  For any query and suggestion please drop mail at:
-  Amruta Misra => amruta.misra@intel.com
-  Pushpendra Kumar => pushpendra.kumar@intel.com
+  For any query and suggestion please drop mail at
+  [+] Amruta Misra (amruta.misra@intel.com)
+  [+] Pushpendra Kumar (pushpendra.kumar@intel.com)
