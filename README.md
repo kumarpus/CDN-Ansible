@@ -1,9 +1,11 @@
+## Content Delivery Network (CDN):
+ 
   Content Delivery Network are growing in importance are being viewed as new class of CPSs.
   The objective of this project is to share an optimize recipe and a CDN reference solution
   based on open source frameworks. This is based on SKL-Purley platform and is a pre cursor
   to upcoming launch of Intel Select Solution for CDN on Cascade Lake platform.
 
-## Content Delivery Network (CDN):
+
  
   > Require Ansible 2.4 or newer \
   > Expects NFVi-BKC (Ubuntu-16.04) Debian hosts
@@ -223,7 +225,7 @@
        ./HevcEncoderApp -i stdin -n [number_of_frames_to_encode] -w [width] -h [height]
   ```
 
-  ### ADDITIONAL INFO:
+  ### Additional info:
   For any query and suggestion please drop mail at
   > Amruta Misra (amruta.misra@intel.com) \
   > Pushpendra Kumar (pushpendra.kumar@intel.com)
