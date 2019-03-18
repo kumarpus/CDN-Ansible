@@ -77,6 +77,7 @@
       version: "{{ ffmpeg_version }}"
     register: ffmpeg_source
 
+  #You can specify the number of cores instead of $(nproc)
   - name: Compiling and Installing the ffmpeg
     become: yes
     shell: "{{ item }}"
