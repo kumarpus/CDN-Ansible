@@ -18,7 +18,7 @@ script:
   - ansible-playbook CDN.yml -i test-inventory --syntax-check
   
   #Running the playbook
-  - ansible-playbook -i test-inventory CDN.yml --connection=localhost --become
+  - ansible-playbook -i test-inventory CDN.yml --become
  
 
 
