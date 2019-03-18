@@ -10,14 +10,15 @@ addons:
 
 install:
   - pip install ansible
+
   - ansible --version
 
 script: 
   #Syntax check
-  - ansible-playbook -i test-inventory CDN.yml --syntax-check
+  - ansible-playbook CDN.yml --syntax-check
   
   #Running the playbook
-  - ansible-playbook -i test-inventory CDN.yml --connection=localhost --sudo
+  - ansible-playbook -i test-inventory CDN.yml --connection=localhost --become -K
  
 
 
