@@ -1,0 +1,33 @@
+language: python
+python: "2.7"
+
+sudo: true
+
+script:
+  #Installing ansible
+  - ansible_install.sh
+
+  #Checking version of ansible
+  - ansible --version 
+ 
+  #Syntax check
+  - ansible-playbook -i inventory CDN.yml --syntax-check
+  
+  #Running the playbook
+  - ansible-playbook -i inventory CDN.yml
+ 
+
+  #Checking the version of CDN components
+
+  #ffmpeg version
+  - ffmpeg -version
+  
+  #nginx version
+  - /usr/local/nginx/sbin/nginx -v
+  
+  #svt version
+  - /opt/SVT_HEVC/Bin/Release/HevcEncoderApp
+
+  #ats version
+  - /opt/ats/bin/trafficserver -version
+
