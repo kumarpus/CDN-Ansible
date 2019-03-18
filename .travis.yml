@@ -3,13 +3,16 @@ python: "2.7"
 
 sudo: true
 
-script:
-  #Installing ansible
-  - ./ansible_install.sh
+addons:
+  apt:
+   packages:
+   - python-pip
 
-  #Checking version of ansible
-  - ansible --version 
- 
+install:
+  - pip install ansible
+  - ansible --version
+
+script: 
   #Syntax check
   - ansible-playbook -i inventory CDN.yml --syntax-check
   
