@@ -14,10 +14,10 @@ install:
 
 script: 
   #Syntax check
-  - ansible-playbook -i inventory CDN.yml --syntax-check
+  - ansible-playbook -i localhost CDN.yml --syntax-check
   
   #Running the playbook
-  - ansible-playbook -i inventory CDN.yml
+  - ansible-playbook -i localhost CDN.yml
  
 
   #Checking the version of CDN components
