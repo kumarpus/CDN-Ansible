@@ -5,8 +5,7 @@ sudo: true
 
 script:
   #Installing ansible
-  - cd CDN-Ansible
-  - ansible_install.sh
+  - ./ansible_install.sh
 
   #Checking version of ansible
   - ansible --version 
