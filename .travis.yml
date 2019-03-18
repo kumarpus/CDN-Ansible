@@ -17,8 +17,9 @@ script:
   - ansible-playbook -i test-inventory CDN.yml --syntax-check
   
   #Running the playbook
-  - ansible-playbook -i test-inventory CDN.yml
+  - ansible-playbook -i test-inventory CDN.yml --connection=localhost --sudo
  
+
 
   #Checking the version of CDN components
 
