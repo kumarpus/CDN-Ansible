@@ -1,0 +1,11 @@
+[trafficservers]
+localhost 
+
+[ffmpeg_servers]
+localhost
+
+[nginx_servers]
+localhost
+
+[svt_servers]
+localhost
