@@ -32,8 +32,8 @@ script:
   - /usr/local/nginx/sbin/nginx -v
   
   #svt version
-  - /opt/SVT_HEVC/Bin/Release/HevcEncoderApp
+#  - /opt/SVT_HEVC/Bin/Release/HevcEncoderApp
 
   #ats version
-  - /opt/ats/bin/trafficserver -version
+#  - /opt/ats/bin/trafficserver -version
 
