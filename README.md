@@ -1,4 +1,5 @@
 ## Content Delivery Network (CDN):
+[![Travis Build Status](https://travis-ci.com/kumarpus/CDN-Ansible.svg?branch=master)](https://travis-ci.com/kumarpus/CDN-Ansible)
  
   Content Delivery Network are growing in importance are being viewed as new class of CPSs.
   The objective of this project is to share an optimize recipe and a CDN reference solution
