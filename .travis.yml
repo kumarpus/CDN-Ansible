@@ -19,7 +19,7 @@ script:
   - ansible-playbook test.yml -i test-inventory --syntax-check
   
   #Running the playbook
-  - ansible-playbook -i test-inventory test.yml --connection=local --become -K 
+  - ansible-playbook -i test-inventory test.yml --connection=local --become 
 
 
   #Checking the version of CDN components
