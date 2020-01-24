@@ -30,7 +30,7 @@
     ngins_rtmp_dir: "/opt/nginx-rtmp-module"
     nginx_sbin_path: "/usr/local/nginx/sbin/nginx"
     nginx_conf_path: "/usr/local/nginx/conf/nginx.conf"
-    nginx_custom_modules: "--with-http_ssl_module"
+    nginx_custom_modules: "--with-http_ssl_module --with-threads"
  
     self_signed_certs:
      - key: /usr/local/nginx/conf/MyKey.key
